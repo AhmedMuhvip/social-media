@@ -10,8 +10,11 @@
 <body>
 <section class="bg-white dark:bg-gray-900">
     <div class="container flex items-center justify-center min-h-screen px-6 mx-auto">
-        <form class="w-full max-w-md">
-            <div class="relative flex items-center mt-8">
+        <form class="w-full max-w-md" method="POST" action="/register" enctype="multipart/form-data">
+            @csrf
+
+
+            <div class="relative flex items-center mt-6">
                 <span class="absolute">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500"
                          fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -20,23 +23,30 @@
                     </svg>
                 </span>
 
-                <input type="text"
+                <input type="text" name="fName"
                        class="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                       placeholder="Username">
+                       placeholder="First Name">
+                <x-form-error name="fName"/>
+
+
+            </div>
+            <div class="relative flex items-center mt-6">
+                <span class="absolute">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500"
+                         fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                    </svg>
+                </span>
+
+                <input type="text" name="lName"
+                       class="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                       placeholder="Last Name">
+
+                <x-form-error name="lName"/>
+
             </div>
 
-            <label for="dropzone-file"
-                   class="flex items-center px-3 py-3 mx-auto mt-6 text-center bg-white border-2 border-dashed rounded-lg cursor-pointer dark:border-gray-600 dark:bg-gray-900">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-300 dark:text-gray-500" fill="none"
-                     viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                          d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
-                </svg>
-
-                <h2 class="mx-3 text-gray-400">Profile Photo</h2>
-
-                <input id="dropzone-file" type="file" class="hidden"/>
-            </label>
 
             <div class="relative flex items-center mt-6">
                 <span class="absolute">
@@ -47,9 +57,11 @@
                     </svg>
                 </span>
 
-                <input type="email"
+                <input type="email" name="email"
                        class="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                        placeholder="Email address">
+                <x-form-error name="email"/>
+
             </div>
 
             <div class="relative flex items-center mt-4">
@@ -61,9 +73,11 @@
                     </svg>
                 </span>
 
-                <input type="password"
+                <input type="password" name="password"
                        class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                        placeholder="Password">
+                <x-form-error name="password"/>
+
             </div>
 
             <div class="relative flex items-center mt-4">
@@ -75,11 +89,24 @@
                     </svg>
                 </span>
 
-                <input type="password"
+                <input type="password" name="password_confirmation"
                        class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                        placeholder="Confirm Password">
-            </div>
+                <x-form-error name="password_confirmation"/>
 
+            </div>
+            <label for="dropzone-file"
+                   class="flex items-center px-3 py-3 mx-auto mt-6 text-center bg-white border-2 border-dashed rounded-lg cursor-pointer dark:border-gray-600 dark:bg-gray-900">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-300 dark:text-gray-500" fill="none"
+                     viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
+                </svg>
+
+                <h2 class="mx-3 text-gray-400">Profile Photo</h2>
+
+                <input id="dropzone-file" type="file" class="hidden" name="image"/>
+            </label>
             <div class="mt-6">
                 <button
                     class="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">

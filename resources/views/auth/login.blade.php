@@ -58,13 +58,17 @@
         </div>
 
         <!-- Email Input -->
-        <form action="">
+        <form method="POST" action="/login" id="form-su">
+            @csrf
+
             <div class="mt-4">
                 <label for="LoggingEmailAddress" class="block mb-2 text-sm font-medium text-gray-200">Email
                     Address</label>
-                <input id="LoggingEmailAddress" type="email"
+                <input id="LoggingEmailAddress" type="email" value="{{old('email')}}" name="email"
                        class="block w-full px-4 py-2 text-gray-300 bg-gray-700 border border-gray-600 rounded-lg focus:ring focus:ring-blue-400 focus:border-blue-400 focus:outline-none"
                        placeholder="example@mail.com">
+                <x-form-error name="email"/>
+
             </div>
 
             <!-- Password Input -->
@@ -73,9 +77,11 @@
                     <label for="loggingPassword" class="block mb-2 text-sm font-medium text-gray-200">Password</label>
                     <a href="#" class="text-xs text-gray-300 hover:underline">Forget Password?</a>
                 </div>
-                <input id="loggingPassword" type="password"
+                <input id="loggingPassword" type="password" name="password"
                        class="block w-full px-4 py-2 text-gray-300 bg-gray-700 border border-gray-600 rounded-lg focus:ring focus:ring-blue-400 focus:border-blue-400 focus:outline-none"
                        placeholder="••••••••">
+                <x-form-error name="password"/>
+
             </div>
 
             <!-- Sign In Button -->
@@ -89,7 +95,7 @@
         <!-- Sign Up Link -->
         <div class="flex items-center justify-between mt-4">
             <span class="w-1/5 border-b border-gray-600"></span>
-            <a href="/signup" class="text-xs text-gray-400 uppercase hover:underline">or sign up</a>
+            <a href="/register" class="text-xs text-gray-400 uppercase hover:underline">or sign up</a>
             <span class="w-1/5 border-b border-gray-600"></span>
         </div>
     </div>

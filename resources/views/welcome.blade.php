@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet"/>
 </head>
 <body class="bg-gray-900">
-<nav class="bg-gray-900 text-white">
+<nav class="text-white">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo"/>
@@ -20,6 +20,16 @@
                     Login
                 </a>
             @endguest
+
+            @auth
+                <form action="/logout" method="POST">
+                    @csrf
+                    <button
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        Logout
+                    </button>
+                </form>
+            @endauth
             <button data-collapse-toggle="navbar-cta" type="button"
                     class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                     aria-controls="navbar-cta" aria-expanded="false">
@@ -34,30 +44,25 @@
         <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-cta">
             <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border rounded-lg  md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                 <li>
-                    <a href="/"
-                       class="block py-2 px-3 md:p-0 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:dark:text-blue-500"
-                       aria-current="page">Home</a>
+                    <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
                 </li>
                 <li>
-                    <a href="#"
-                       class="block py-2 px-3 md:p-0 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:dark:text-blue-500"
-                       aria-current="page">About</a>
+                    <x-nav-link href="/jobs" :active="request()->is('jobs')">Jobs</x-nav-link>
+
                 </li>
                 <li>
-                    <a href="#"
-                       class="block py-2 px-3 md:p-0 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:dark:text-blue-500"
-                       aria-current="page">Contact</a>
+                    <x-nav-link href="/contact" :active="request()->is('contact')">Contact</x-nav-link>
+
                 </li>
                 <li>
-                    <a href="#"
-                       class="block py-2 px-3 md:p-0 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:dark:text-blue-500"
-                       aria-current="page">Services</a>
+                    <x-nav-link href="/profile" :active="request()->is('profile')">My Profile</x-nav-link>
                 </li>
 
             </ul>
         </div>
     </div>
 </nav>
+@include('posts')
 <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
 </body>
 </html>
