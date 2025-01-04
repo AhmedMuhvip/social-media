@@ -26,10 +26,10 @@
                 <input type="text" name="fName"
                        class="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                        placeholder="First Name">
-                <x-form-error name="fName"/>
 
 
             </div>
+            <x-form-error name="fName"/>
             <div class="relative flex items-center mt-6">
                 <span class="absolute">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500"
@@ -43,11 +43,9 @@
                        class="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                        placeholder="Last Name">
 
-                <x-form-error name="lName"/>
 
             </div>
-
-
+            <x-form-error name="lName"/>
             <div class="relative flex items-center mt-6">
                 <span class="absolute">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500"
@@ -60,9 +58,9 @@
                 <input type="email" name="email"
                        class="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                        placeholder="Email address">
-                <x-form-error name="email"/>
 
             </div>
+            <x-form-error name="email"/>
 
             <div class="relative flex items-center mt-4">
                 <span class="absolute">
@@ -76,9 +74,9 @@
                 <input type="password" name="password"
                        class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                        placeholder="Password">
-                <x-form-error name="password"/>
 
             </div>
+            <x-form-error name="password"/>
 
             <div class="relative flex items-center mt-4">
                 <span class="absolute">
@@ -92,9 +90,9 @@
                 <input type="password" name="password_confirmation"
                        class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                        placeholder="Confirm Password">
-                <x-form-error name="password_confirmation"/>
-
             </div>
+            <x-form-error name="password_confirmation"/>
+
             <label for="dropzone-file"
                    class="flex items-center px-3 py-3 mx-auto mt-6 text-center bg-white border-2 border-dashed rounded-lg cursor-pointer dark:border-gray-600 dark:bg-gray-900">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-300 dark:text-gray-500" fill="none"

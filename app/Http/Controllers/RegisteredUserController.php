@@ -5,13 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rules\Enum;
 use Illuminate\Validation\Rules\Password;
+
+use function PHPUnit\Framework\matches;
+
 
 class RegisteredUserController extends Controller
 {
     public function create()
     {
         return view('auth.signup');
+
     }
 
     public function store()
@@ -24,7 +29,8 @@ class RegisteredUserController extends Controller
             'password' => ['required', Password::min(8), 'confirmed'],
             'image'    => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
         ]);
-        $imageName  = time().'.'.request()->image->extension();
+
+        $imageName = time().'.'.request()->image->extension();
         request()->image->move(public_path('images'), $imageName);
         $attributes['image'] = 'images/'.$imageName;
         $user                = User::create($attributes);

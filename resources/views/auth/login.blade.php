@@ -67,10 +67,9 @@
                 <input id="LoggingEmailAddress" type="email" value="{{old('email')}}" name="email"
                        class="block w-full px-4 py-2 text-gray-300 bg-gray-700 border border-gray-600 rounded-lg focus:ring focus:ring-blue-400 focus:border-blue-400 focus:outline-none"
                        placeholder="example@mail.com">
-                <x-form-error name="email"/>
 
             </div>
-
+            <x-form-error name="email"/>
             <!-- Password Input -->
             <div class="mt-4">
                 <div class="flex justify-between">
@@ -80,9 +79,9 @@
                 <input id="loggingPassword" type="password" name="password"
                        class="block w-full px-4 py-2 text-gray-300 bg-gray-700 border border-gray-600 rounded-lg focus:ring focus:ring-blue-400 focus:border-blue-400 focus:outline-none"
                        placeholder="••••••••">
-                <x-form-error name="password"/>
 
             </div>
+            <x-form-error name="password"/>
 
             <!-- Sign In Button -->
             <div class="mt-6">
