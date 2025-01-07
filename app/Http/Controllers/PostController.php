@@ -8,28 +8,35 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    public function store()
+    public function store(Request $request)
     {
         // Adjust the validation as per your requirement
-        $details = request()->validate([
+        $details = $request->validate([
             'content' => 'required',
             'image'   => ['nullable', 'file', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
         ]);
 
         // Check if an image was uploaded
-        if (request()->hasFile('image')) {
-            $imageName = time().'.'.request()->image->extension();
-            request()->image->move(public_path('p_images'), $imageName);
-            $details['image'] = 'p_images/'.$imageName;
+        if ($request->hasFile('image')) {
+            $details['type'] = 'txtImage';
+            $imageName       = time().'.'.$request->image->extension();
+            $request->image->move(public_path('p_images'), $imageName);
+            $details['image'] = 'p_images/'.$imageName; // Store image path
+        } else {
+            $details['type']  = 'txt';
+            $details['image'] = null;
         }
 
         // Associate the post with the authenticated user
-        $details['user_id'] = Auth::id(); // Get the authenticated user's ID
+        // Use Auth::id() to get the user ID
+        Post::create([
+            'content' => $details['content'],
+            'image'   => $details['image'],  // Can be null if no image
+            'type'    => $details['type'],
+            'user_id' => Auth::id(), // Correctly use the user ID
+        ]);
 
-        // Create the post
-        Post::create($details);
-
-        // Redirect to the home page
+        // Redirect to the home page with a success message
         return redirect('/');
     }
 }

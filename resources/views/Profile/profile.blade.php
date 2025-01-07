@@ -102,28 +102,10 @@
             </div>
         </div>
     </div>
-    @foreach($posts as $post)
-        <div>
-            <article>
-                <img class="sm:h-[34rem] mt-10 w-full object-contain"
-                     src="{{$post->image}}"
-                     alt="Featured Image"/>
-                <div
-                    class="mx-auto mt-10 max-w-screen-md space-y-12 px-4 py-10 font-serif text-lg tracking-wide text-white">
-                    {{$post->content}}
-                </div>
-            </article>
+    @include('posts')
 
-
-            <div class="w-fit mx-auto mt-10 flex space-x-2">
-                <div class="h-0.5 w-2 bg-gray-600"></div>
-                <div class="h-0.5 w-32 bg-gray-600"></div>
-                <div class="h-0.5 w-2 bg-gray-600"></div>
-            </div>
-        </div>
-    @endforeach
+    {{$posts->links()}}
 </div>
-{{$posts->links()}}
 
 <script>
     // Toggle Modal Visibility

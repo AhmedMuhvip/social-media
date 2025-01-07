@@ -15,7 +15,7 @@
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="" class="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo"/>
-            <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
+            <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">SocializeX</span>
         </a>
         <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             @guest
@@ -69,13 +69,13 @@
         <div class="p-4">
             <div class="flex items-center space-x-4">
                 <img
-                    src="@if(\Illuminate\Support\Facades\Auth::check()){{\Illuminate\Support\Facades\Auth::user()->image}} @endif "
+                    src="@if(\Illuminate\Support\Facades\Auth::check()){{$user->image}} @endif "
                     alt="Profile picture"
                     class="w-12 h-12 rounded-full object-cover">
                 <button onclick="openPostModal()"
                         class="flex-1 bg-gray-100 dark:bg-gray-700 rounded-full py-3 px-4 text-left text-gray-500 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200">
                     What's on your mind, @if(\Illuminate\Support\Facades\Auth::check())
-                        {{\Illuminate\Support\Facades\Auth::user()->fName}}
+                        {{$user->fName}}
                     @endif ?
                 </button>
             </div>
@@ -117,13 +117,13 @@
         <div class="p-4">
             <div class="flex items-center space-x-3 mb-4">
                 <img
-                    src="@if(\Illuminate\Support\Facades\Auth::check()) {{\Illuminate\Support\Facades\Auth::user()->image}}@endif"
+                    src="@if(\Illuminate\Support\Facades\Auth::check()) {{$user->image}}@endif"
                     alt="Profile picture"
                     class="w-10 h-10 rounded-full object-cover">
                 <div>
                     <p class="font-semibold text-gray-900 dark:text-white">
                         @if(\Illuminate\Support\Facades\Auth::check())
-                            {{ \Illuminate\Support\Facades\Auth::user()->fName }} {{ \Illuminate\Support\Facades\Auth::user()->lName }}
+                            {{ $user->fName }} {{ $user->lName }}
                         @endif
                     </p>
                     <div class="flex items-center space-x-1">
@@ -140,7 +140,7 @@
             <form method="POST" action="/publish" enctype="multipart/form-data">
                 @csrf
                 <textarea name="content"
-                          placeholder="What's on your mind, @if(\Illuminate\Support\Facades\Auth::check()) {{\Illuminate\Support\Facades\Auth::user()->fName}}@endif?"
+                          placeholder="What's on your mind, @if(\Illuminate\Support\Facades\Auth::check()) {{$user->fName}}@endif?"
                           class="w-full h-32 p-3 border-0 focus:ring-0 text-gray-900 dark:text-white bg-transparent resize-none"></textarea>
                 <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-3 mb-4">
 
@@ -157,7 +157,6 @@
                     <div id="file-info" class="mt-2 text-gray-600 dark:text-gray-300"></div>
 
                 </div>
-
                 <button
                     class="w-full bg-blue-500 text-white rounded-lg py-2 font-semibold hover:bg-blue-600 transition-colors duration-200">
                     Post
@@ -166,9 +165,7 @@
         </div>
     </div>
 </div>
-
 @include('posts')
-
 <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
 <script>
     function openPostModal() {
@@ -183,3 +180,4 @@
 </script>
 </body>
 </html>
+
