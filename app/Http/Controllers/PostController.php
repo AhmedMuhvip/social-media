@@ -39,4 +39,26 @@ class PostController extends Controller
         // Redirect to the home page with a success message
         return redirect('/');
     }
+
+    public function update(Post $post)
+    {
+        request()->validate([
+            'content' => 'required',
+        ]);
+
+        $post->update([
+            'content' => request('content'),
+        ]);
+
+        return redirect('/');
+    }
+
+
+    public function destroy(Post $post)
+    {
+        $post->delete();
+
+        return redirect('/');
+
+    }
 }

@@ -8,6 +8,7 @@ use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index']);
+
 Route::get('/register', [RegisteredUserController::class, 'create']);
 Route::post('/register', [RegisteredUserController::class, 'store']);
 
@@ -16,4 +17,6 @@ Route::post('/login', [SessionController::class, 'store']);
 Route::post('/publish', [PostController::class, 'store'])->name('publish');
 Route::get('/profile', [ProfileController::class, 'index']);
 Route::patch('/profile-edit', [ProfileController::class, 'update']);
+Route::patch('/edit/{post}', [PostController::class, 'update']);
+Route::delete('/delete/{post}', [PostController::class, 'destroy']);
 Route::post('/logout', [SessionController::class, 'destroy']);
