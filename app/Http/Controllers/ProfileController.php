@@ -17,7 +17,7 @@ class ProfileController extends Controller
         $posts = $user->post()->simplePaginate(1);
 
         // Pass the user data to the profile view
-        return view('Profile.profile', compact('user', 'posts'));
+        return view('profile.profile', compact('user', 'posts'));
     }
 
     public function update()

@@ -37,7 +37,7 @@
 
 <div class="min-h-screen bg-gray-900 py-10 px-5 text-white">
     <div class="max-w-6xl mx-auto bg-gray-800 p-8 rounded-xl shadow-lg">
-        <!-- Profile Header with Avatar and Edit Button -->
+        <!-- profile Header with Avatar and Edit Button -->
         <div class="flex items-center justify-between">
             <div class="flex items-center space-x-6">
                 <div class="relative">
@@ -49,7 +49,7 @@
                     <p class="text-lg text-white">{{$user->email}}</p>
                 </div>
             </div>
-            <!-- Edit Profile Button -->
+            <!-- Edit profile Button -->
             <button type="button" data-modal-target="editProfileModal" data-modal-toggle="editProfileModal"
                     class="bg-indigo-500 hover:bg-indigo-600 text-white font-medium py-2 px-6 rounded-full shadow-lg transition-transform transform hover:scale-105">
                 Edit Profile
