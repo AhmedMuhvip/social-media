@@ -14,7 +14,7 @@ class ProfileController extends Controller
     {
         // Get the authenticated user
         $user  = Auth::user();
-        $posts = $user->post()->simplePaginate(1);
+        $posts = $user->post()->latest()->simplePaginate(1);
 
         // Pass the user data to the profile view
         return view('profile.profile', compact('user', 'posts'));

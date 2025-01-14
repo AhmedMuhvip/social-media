@@ -104,7 +104,6 @@
     </div>
     @include('posts')
 
-    {{$posts->links()}}
 </div>
 
 <script>

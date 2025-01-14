@@ -6,10 +6,12 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SessionController;
-use App\Http\Controllers\userProfileController;
+use App\Http\Controllers\UserProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [HomeController::class, 'index']);
+// TODO : change to polices later
+//FIXME:
+Route::get('/', [HomeController::class, 'index'])->middleware('verified', 'auth');
 
 Route::get('/register', [RegisteredUserController::class, 'create']);
 Route::post('/register', [RegisteredUserController::class, 'store']);
@@ -22,5 +24,5 @@ Route::patch('/profile-edit', [ProfileController::class, 'update']);
 Route::patch('/edit/{post}', [PostController::class, 'update']);
 Route::delete('/delete/{post}', [PostController::class, 'destroy']);
 Route::get('/search', [SearchController::class, 'show']);
-Route::get('/userprofile/{user}', [userProfileController::class, 'show']);
+Route::get('/userprofile/{user}', [UserProfileController::class, 'show']);
 Route::post('/logout', [SessionController::class, 'destroy']);
