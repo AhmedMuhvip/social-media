@@ -12,17 +12,23 @@ class HomeController extends Controller
 {
     public function index()
     {
-//        if ( ! Auth::user()) {
-//            return redirect('/login');
-//        };
+        $user  = Auth::user();
+        $posts = $user->post;
 
-        $posts = Auth::check() ? Auth::user()->post()->latest()->paginate(2) : false;
+        // Get the user's friends
+        $friends = $user->friends;
 
-//        $posts = Post::with('user')->latest()->simplePaginate('2');
+        // Get the posts of the user's friends
+        $friendsPosts = Post::whereIn('user_id', $friends->pluck('friend_id'))->get();
+
+        // Merge and sort the posts
+        $allPosts = $posts->merge($friendsPosts)->sortByDesc('created_at');
+
+//        dd($posts);
 
         return view('welcome', [
-            'user'  => Auth::user(),
-            'posts' => $posts,
+            'user'  => $user,
+            'posts' => $allPosts,
         ]);
     }
 }

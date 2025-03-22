@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
@@ -12,8 +14,8 @@ class PostController extends Controller
     {
         // Adjust the validation as per your requirement
         $details = $request->validate([
-            'content' => 'required',
-            'image'   => ['nullable', 'file', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+                'content' => 'required',
+                'image'   => ['nullable', 'file', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
         ]);
 
         // Check if an image was uploaded
@@ -30,10 +32,10 @@ class PostController extends Controller
         // Associate the post with the authenticated user
         // Use Auth::id() to get the user ID
         Post::create([
-            'content' => $details['content'],
-            'image'   => $details['image'],  // Can be null if no image
-            'type'    => $details['type'],
-            'user_id' => Auth::id(), // Correctly use the user ID
+                'content' => $details['content'],
+                'image'   => $details['image'],  // Can be null if no image
+                'type'    => $details['type'],
+                'user_id' => Auth::id(), // Correctly use the user ID
         ]);
 
         // Redirect to the home page with a success message
@@ -42,12 +44,14 @@ class PostController extends Controller
 
     public function update(Post $post)
     {
+        \Gate::authorize('delete-post', $post);
+
         request()->validate([
-            'content' => 'required',
+                'content' => 'required',
         ]);
 
         $post->update([
-            'content' => request('content'),
+                'content' => request('content'),
         ]);
 
         return redirect('/');
@@ -56,6 +60,11 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
+//        if (Auth::user()->cannot('delete-post', $post)) {
+//            dd('failure');
+//        }
+
+//        \Gate::authorize('delete-post', $post);
         $post->delete();
 
         return redirect('/');

@@ -49,4 +49,11 @@
                 <div class="md:col-span-2 space-y-6">
                     <!-- Create Post -->
                     <!-- Posts -->
-@include('profile.profile_Posts')
+                    @include('profile.profile_Posts')
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

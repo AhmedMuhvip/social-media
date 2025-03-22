@@ -24,13 +24,25 @@
         </div>
     </div>
     <div class="flex space-x-3">
+        @if($friend_status)
+            <a href="/friend/delete/{{$user->id}}"
+               class="bg-gray-100 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-200 transition duration-200">
+                Friends
+            </a>
+        @else
+            <a href="/friend-request/{{$user->id}}"
+               class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-200">
+                Sent Friend Request
+            </a>
+        @endif
+        @if (session('message'))
+            <div class="alert alert-success">
+                {{session('message') }}
+            </div>
+        @endif
         <button
-            class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-200">
-            Send Friends Request
-        </button>
-        <button
-            class="bg-gray-100 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-200 transition duration-200">
-            Share Profile
+                class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-200">
+            Message
         </button>
     </div>
 </div>

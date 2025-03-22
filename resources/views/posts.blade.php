@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-900">
-
+{{--@dd($friends_posts->id)--}}
 @foreach($posts as $post)
     <div class="max-w-2xl mx-auto px-4 mt-8">
         <!-- Single Post -->
@@ -26,27 +26,31 @@
                     </div>
 
                     <!-- Dropdown Menu -->
-                    <div class="relative">
-                        <button id="dropdown-button-{{$post->id}}"
-                                class="p-2 text-gray-500 hover:text-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-gray-300">
-                            <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                 viewBox="0 0 20 20">
-                                <path
-                                    d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"/>
-                            </svg>
-                        </button>
-                        <div id="dropdown-menu-{{$post->id}}"
-                             class="hidden absolute right-0 mt-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg w-40">
-                            <button onclick="openEditForm({{$post->id}})"
-                                    class="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600">
-                                Edit Post
+                    @can('edit',$post)
+                        <div class="relative">
+                            <button id="dropdown-button-{{$post->id}}"
+                                    class="p-2 text-gray-500 hover:text-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-gray-300">
+                                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                     viewBox="0 0 20 20">
+                                    <path
+                                            d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"/>
+                                </svg>
                             </button>
-                            <button form="delete-form-{{$post->id}}"
-                                    class="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600">
-                                Delete Post
-                            </button>
+
+                            <div id="dropdown-menu-{{$post->id}}"
+                                 class="hidden absolute right-0 mt-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg w-40">
+                                <button onclick="openEditForm({{$post->id}})"
+                                        class="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600">
+                                    Edit Post
+                                </button>
+                                <button form="delete-form-{{$post->id}}"
+                                        class="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600">
+                                    Delete Post
+                                </button>
+                            </div>
                         </div>
-                    </div>
+                    @endcan
+
                 </div>
 
                 <!-- Post Content -->
@@ -89,30 +93,53 @@
 
 <div class="mt-8">
     <div class="max-w-2xl mx-auto px-4">
-        {{$posts->links()}}
+        {{--        {{$posts->links()}}--}}
     </div>
 </div>
 
 <script>
+    // Function to toggle dropdown visibility
     function toggleDropdown(postId) {
         const dropdownMenu = document.getElementById(`dropdown-menu-${postId}`);
         dropdownMenu.classList.toggle("hidden");
+
+        // Close other dropdowns
+        document.querySelectorAll('[id^="dropdown-menu-"]').forEach(menu => {
+            if (menu.id !== `dropdown-menu-${postId}`) {
+                menu.classList.add("hidden");
+            }
+        });
     }
 
+    // Open the edit form and hide the post content
     function openEditForm(postId) {
         document.getElementById(`edit-form-${postId}`).classList.remove("hidden");
         document.getElementById(`post-content-${postId}`).classList.add("hidden");
         document.getElementById(`dropdown-menu-${postId}`).classList.add("hidden");
     }
 
+    // Close the edit form and show the post content
     function closeEditForm(postId) {
         document.getElementById(`edit-form-${postId}`).classList.add("hidden");
         document.getElementById(`post-content-${postId}`).classList.remove("hidden");
     }
 
-    // Event Listener for Dropdown Buttons
+    // Close dropdown on clicking outside
+    document.addEventListener('click', function (e) {
+        if (!e.target.closest('[id^="dropdown-button-"]')) {
+            // Close all dropdowns
+            document.querySelectorAll('[id^="dropdown-menu-"]').forEach(menu => {
+                menu.classList.add("hidden");
+            });
+        }
+    });
+
+    // Initialize dropdown buttons and their toggle event listeners
     @foreach($posts as $post)
-    document.getElementById(`dropdown-button-{{$post->id}}`).addEventListener("click", () => toggleDropdown({{$post->id}}));
+    document.getElementById(`dropdown-button-{{$post->id}}`).addEventListener("click", (e) => {
+        e.stopPropagation();  // Prevent event propagation to document
+        toggleDropdown({{$post->id}});
+    });
     @endforeach
 </script>
 </body>
